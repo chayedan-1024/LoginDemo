@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<div class="container" align="center">
+    <h3>这里是首页</h3>
+    <a href="{{ url_for('show_') }}">测试登录</a>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div><p style="color: red">{{ messages }}</p> </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <li>
+        <a>查询登录名路径，登录状态查询：/showuser</a>
+    </li>
+    {% if current_user.is_authenticated %}
+        <li>
+            <a>当前登录用户名：{{ username }}</a>
+        </li>
+        <li>
+            <a href="{{ url_for("logout") }}">登出</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ url_for("login") }}">登录</a>
+        </li>
+    {% endif %}
+</div>
+</body>
+</html>
